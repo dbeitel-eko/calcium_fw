@@ -10,6 +10,7 @@
 #include <lvgl_mem.h>
 #include <lvgl_zephyr.h>
 #include <stdio.h>
+
 #include "../ui/ui.h"
 
 #define LOG_LEVEL CONFIG_LOG_DEFAULT_LEVEL
@@ -33,15 +34,8 @@ int main(void)
 	 */
 	lvgl_lock();
 
-    ui_init("A:");
-//  Replace the label creation below with a screen load function, like:    
-//	lv_screen_load(my_screen_create());
-    lv_obj_t * label = lv_label_create(lv_screen_active());
-    lv_obj_center(label);
-    lv_obj_set_width(label, lv_pct(80));
-    lv_obj_set_style_text_align(label, LV_TEXT_ALIGN_CENTER, 0);
-    lv_label_set_text(label, "Call lv_screen_load(my_screen_create()) in main.c to load a screen of a UI");
-
+	ui_init("A:");
+  lv_screen_load(screen_components_create());
 
 #ifndef CONFIG_LV_Z_RUN_LVGL_ON_WORKQUEUE
 	lv_timer_handler();
